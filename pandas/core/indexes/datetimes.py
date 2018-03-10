@@ -2202,41 +2202,63 @@ def _generate_regular_range(start, end, periods, offset):
 def date_range(start=None, end=None, periods=None, freq='D', tz=None,
                normalize=False, name=None, closed=None, **kwargs):
     """
-    Return a fixed frequency DatetimeIndex, with day (calendar) as the default
-    frequency
+    Return a fixed frequency DatetimeIndex.
+
+    The DatetimeIndex metadata will have a day (calendar) as the default
+    frequency.
 
     Parameters
     ----------
     start : string or datetime-like, default None
-        Left bound for generating dates
+        Left bound for generating dates.
     end : string or datetime-like, default None
-        Right bound for generating dates
+        Right bound for generating dates.
     periods : integer, default None
-        Number of periods to generate
+        Number of periods to generate.
     freq : string or DateOffset, default 'D' (calendar daily)
-        Frequency strings can have multiples, e.g. '5H'
+        Frequency strings can have multiples, e.g. '5H'.
     tz : string, default None
         Time zone name for returning localized DatetimeIndex, for example
-        Asia/Hong_Kong
+        Asia/Hong_Kong.
     normalize : bool, default False
-        Normalize start/end dates to midnight before generating date range
+        Normalize start/end dates to midnight before generating date range.
     name : string, default None
-        Name of the resulting DatetimeIndex
+        Name of the resulting DatetimeIndex.
     closed : string, default None
         Make the interval closed with respect to the given frequency to
-        the 'left', 'right', or both sides (None)
-
-    Notes
-    -----
-    Of the three parameters: ``start``, ``end``, and ``periods``, exactly two
-    must be specified.
-
-    To learn more about the frequency strings, please see `this link
-    <http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases>`__.
+        the 'left', 'right', or both sides (None).
 
     Returns
     -------
-    rng : DatetimeIndex
+    DatetimeIndex
+        Timestamp objects with metadata such as frequency information.
+
+    Examples
+    ---------
+    A ``DatetimeIndex`` is typically returned with metadata of frequency
+
+    >>> pd.date_range(start='1/1/2011', periods=12)
+    DatetimeIndex(['2011-01-01', '2011-01-02', '2011-01-03', '2011-01-04',
+               '2011-01-05', '2011-01-06', '2011-01-07', '2011-01-08',
+               '2011-01-09', '2011-01-10', '2011-01-11', '2011-01-12'],
+              dtype='datetime64[ns]', freq='D')
+
+    Notes
+    ------
+    Of the three parameters: ``start``, ``end``, and ``periods``, exactly two
+    must be specified.
+
+    To learn more about the frequency strings, please see this link
+    <http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases>.
+
+    See Also
+    --------
+    timeseries : 
+        This represents regular frequency increment.
+        <http://pandas.pydata.org/pandas-docs/stable/timeseries.html#dateoffset-objects>
+    DatetimeIndex : 
+        This represents regular frequency increment.
+        <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DatetimeIndex.html>
     """
     return DatetimeIndex(start=start, end=end, periods=periods,
                          freq=freq, tz=tz, normalize=normalize, name=name,
